@@ -9,7 +9,13 @@ const app = express();
 
 app.use(express.json());
 
-app.use(cors());
+const corsOptions = {
+  origin: 'http://localhost', // Reemplaza con la URL de tu aplicación Angular si es diferente
+  optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
+
 
 //Inicializando archivos de configuracion
 uploadMinecraftFiles();
