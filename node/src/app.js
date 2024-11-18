@@ -9,12 +9,11 @@ const app = express();
 
 app.use(express.json());
 
-const corsOptions = {
-  origin: 'http://localhost', // Reemplaza con la URL de tu aplicación Angular si es diferente
-  optionsSuccessStatus: 200
-};
+// Permitir todas las solicitudes con CORS
+app.use(cors());
 
-app.use(cors(corsOptions));
+// Middleware para responder a solicitudes preflight
+app.options('*', cors());
 
 
 //Inicializando archivos de configuracion
