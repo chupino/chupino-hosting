@@ -1,0 +1,23 @@
+<nav class="sidebar">
+  <h2 class="sidebar-title">Chupino Hosting</h2>
+  <ul class="sidebar-items">
+    <li routerLink="aplicaciones" routerLinkActive="active"><a>Aplicaciones</a></li>
+    <!-- Agrega más elementos de navegación aquí -->
+  </ul>
+  <div class="user-profile">
+    <div class="user-data">
+      <img [src]="user?.avatarURL || 'path/to/default/avatar.jpg'" alt="User Avatar" class="user-avatar">
+      <p class="user-name">{{ user?.nombres || 'Cargando...' }}</p>
+    </div>
+    <button mat-icon-button (click)="toggleMenu()" class="menu-icon">
+      <mat-icon class="white-icon">more_vert</mat-icon>
+    </button>
+    @if (isMenuVisible) {
+      <div class="user-menu">
+        <ul>
+          <li><a (click)="logout()">Logout</a></li>
+        </ul>
+      </div>
+    }
+  </div>
+</nav>

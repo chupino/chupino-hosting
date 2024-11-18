@@ -1,0 +1,126 @@
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.sidebar-items {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.sidebar-items li {
+  width: 100%;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.sidebar-items li a {
+  text-decoration: none;
+  color: #ecf0f1;
+  display: block;
+  padding: 10px 15px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.sidebar-items li a:hover,
+.sidebar-items li.active a {
+  background-color: #34495e;
+}
+
+.user-profile {
+  margin-top: auto;
+  text-align: center;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.user-profile .user-data{
+  margin-top: auto;
+  text-align: center;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.user-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
+
+.user-name {
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+  color: #FFC800;
+}
+
+.menu-icon {
+  font-size: 24px;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+.user-menu {
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #1abc9c; /* Cambia el color de fondo para mejor contraste */
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  text-align: left;
+  margin-bottom: 10px; /* Agrega margen para separarlo de los datos del usuario */
+}
+
+.user-menu ul {
+  list-style: none;
+  padding: 10px 0;
+  margin: 0;
+}
+
+.user-menu ul li {
+  padding: 10px 15px;
+}
+
+.white-icon {
+  color: #ecf0f1; /* Hace que el icono sea blanco */
+}
+
+.user-menu ul li a {
+  text-decoration: none;
+  color: #ecf0f1;
+  display: block;
+}
+
+
+.user-menu li:last-child a {
+  color: #ff0000; 
+}
+
+.user-menu li:hover {
+  background-color: #c28ef3;
+}

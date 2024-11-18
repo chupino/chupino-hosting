@@ -1,0 +1,54 @@
+.juego-selector-container {
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.juego-selector-container h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+  text-align: center;
+}
+
+.juego-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: start;
+}
+
+.juego-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  background-color: #8493ff;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  width: 150px;
+  text-align: center;
+}
+
+.juego-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.juego-item.selected {
+  border: 2px solid #583cb3;
+  background-color: #00203f;
+}
+
+.juego-imagen {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.juego-nombre {
+  font-size: 18px;
+  color: #ffffff;
+}

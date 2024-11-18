@@ -1,0 +1,16 @@
+<div class="server-type-selector-container">
+  @if (serverTypes?.length === 0) {
+    <p>No hay servidores disponibles</p>
+  }
+  @for (serverType of serverTypes; track $index) {
+    <div 
+      class="server-type-item" 
+      (click)="selectServerType(serverType)"
+      [ngClass]="{'selected': selectedServerType?.id === serverType.id}"
+    >
+      <img [src]="serverType.imageURL" alt="{{ serverType.cpu }}" class="server-type-image">
+      <h3 class="server-type-title">{{ serverType.cpu }}</h3>
+      <p class="server-type-description">{{ serverType.ram }}, {{ serverType.storage }} Storage</p>
+    </div>
+  }
+</div>

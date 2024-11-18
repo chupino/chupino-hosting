@@ -1,0 +1,77 @@
+.crear-servidor-container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+.title-text {
+  margin-left: 10px;
+}
+
+.page-title {
+  color: #ecf0f1;
+  border-radius: 4px;
+  text-align: center;
+  margin: 0;
+  width: 100%;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.step {
+  background-color: #303b70;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.step h3 {
+  color: #ecf0f1;
+  margin: 0;
+  margin-bottom: 10px;
+  font-size: 24px;
+  justify-content: center;
+}
+.step .step_title {
+  margin-left: 10px;
+}
+.faded {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.btn-prev {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.btn-next {
+  background-color: #007bff;
+  color: white;
+}
+
+button {
+  margin: 10px;
+}
+
+.btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

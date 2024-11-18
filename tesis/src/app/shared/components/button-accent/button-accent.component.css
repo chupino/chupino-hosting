@@ -1,0 +1,29 @@
+.accent-button {
+    font-size: 18px;
+    background-color: #ff5722; 
+    padding: 10px 20px;
+    border: none; 
+    border-radius: 4px; 
+    color: white; 
+    display: flex;
+    align-items: center;
+    line-height: 1.5;
+    height: auto;
+}
+
+.accent-button:hover {
+    background-color: #ff7043;
+    cursor: pointer;
+}
+
+.accent-button .icon {
+    font-size: 50px; 
+    margin-right: 8px;
+    line-height: 1;
+    height: 50px;
+    width: 50px;
+}
+
+.accent-button .label {
+    font-size: 30px;
+}

@@ -1,0 +1,69 @@
+<div class="servidor-info-container">
+  <div class="header">
+    <h1>{{ serverInfo?.nombre }}</h1>
+  </div>
+
+  <div class="action-buttons">
+    <button
+      class="custom-button pause-button"
+      (click)="pauseServer()"
+      [disabled]="serverInfo?.estado !== 'Listo para jugar'"
+    >
+      <span class="material-icons">pause</span>
+    </button>
+    <button
+      class="custom-button resume-button"
+      (click)="resumeServer()"
+      [disabled]="serverInfo?.estado !== 'Detenido'"
+    >
+      <span class="material-icons">play_arrow</span>
+    </button>
+    <button class="custom-button reset-button" (click)="resetServer()">
+      <span class="material-icons">refresh</span>
+    </button>
+    <button class="custom-button delete-button" (click)="deleteServer()">
+      <span class="material-icons">delete</span>
+    </button>
+  </div>
+
+  <div class="tab-container">
+    <div class="tabs">
+      <div class="tab" [ngClass]="{'active': activeTab === 'monitoreo'}" (click)="setActiveTab('monitoreo')">
+        <mat-icon>monitor</mat-icon> Monitoreo
+      </div>
+      <div class="tab" [ngClass]="{'active': activeTab === 'informacion'}" (click)="setActiveTab('informacion')">
+        <mat-icon>info</mat-icon> Información
+      </div>
+    </div>
+    @switch (activeTab) {
+      @case ('monitoreo') {
+        <div id="monitoreo" class="tab-content">
+          <h2>Detalles</h2>
+          <p><strong>Estado:</strong> {{ serverInfo?.estado }}</p>
+          <p><strong>Dirección IP:</strong> {{ serverInfo?.droplet?.ip_address }}</p>
+        </div>
+      }
+      @case ('informacion') {
+        <div id="informacion" class="tab-content">
+          <h2>Configuración Del Servidor</h2>
+          <p><strong>Nombre del Servidor:</strong> {{ serverInfo?.nombre }}</p>
+          <p><strong>Tipo de Servidor:</strong> {{ serverInfo?.hardwareType?.cpu }}</p>
+          <p><strong>Juego:</strong> {{ serverInfo?.juego?.nombre }}</p>
+          <h2>Configuración Del Juego</h2>
+          @for (config of serverInfo?.configuraciones; track $index) {
+            <div>
+              <p><strong>{{ config.clave }}:</strong> {{ config.valor }}</p>
+            </div>
+          }
+        </div>
+      }
+    }
+  </div>
+  
+
+  @if (showAlert) {
+  <div class="alert" [ngClass]="alertType">
+    {{ alertMessage }}
+  </div>
+  }
+</div>

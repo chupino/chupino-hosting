@@ -1,0 +1,37 @@
+<h1 class="page-title">
+    <mat-icon>apps</mat-icon> <span class="title-text">Aplicaciones</span>
+</h1>
+<app-button-accent
+  [icon]="'add'"
+  [label]="'CREAR'"
+  (onClick)="navigateToCreateServer()"
+  class="floating-button">
+</app-button-accent>
+
+<div class="apps-container">
+    @if (servers?.length === 0) {
+        <div class="no-servers-container">
+            <mat-icon class="no-servers-icon">sentiment_very_dissatisfied</mat-icon>
+            <p class="no-servers-text">No hay aplicaciones registradas</p>
+        </div>
+    } @else {
+        <table class="apps-table">
+            <thead>
+                <tr>
+                    <th>Juego</th>
+                    <th>Nombre</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (server of servers; track $index) {
+                    <tr [routerLink]="['/dashboard','aplicaciones', server.id]" class="table-row">
+                        <td><img [src]="server.juego.imageURL" alt="{{ server.nombre }}" class="item-image"></td>
+                        <td>{{ server.nombre }}</td>
+                        <td>{{ server.estado }}</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

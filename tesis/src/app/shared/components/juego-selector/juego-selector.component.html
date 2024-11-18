@@ -1,0 +1,10 @@
+<div class="juego-selector-container">
+  <div class="juego-list">
+    @for (juego of juegos; track $index) {
+      <div class="juego-item" [class.selected]="juego === selectedJuego" (click)="selectJuego(juego)">
+        <img [src]="juego.imageURL" alt="{{juego.nombre}}" class="juego-imagen">
+        <span class="juego-nombre">{{juego.nombre}}</span>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,91 @@
+.servidor-info-container {
+  width: 100%;
+  margin: auto;
+}
+
+.header {
+  display: flex;
+  justify-content: flex-start;
+  color: #ffffff;
+  align-items: center;
+  margin-bottom: 1em;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.custom-button {
+  background-color: #f0f0f0; /* color de fondo por defecto */
+  border: none;
+  border-radius: 4px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.custom-button:disabled {
+  background-color: #b0b0b0;
+  cursor: not-allowed;
+}
+
+.custom-button .material-icons {
+  font-size: 24px;
+  color: #ffffff; /* icono siempre blanco */
+}
+
+/* Colores de fondo específicos para cada botón */
+.pause-button {
+  background-color: #ff9800; /* fondo naranja para pausa */
+}
+
+.resume-button {
+  background-color: #4caf50; /* fondo verde para reanudar */
+}
+
+.reset-button {
+  background-color: #2196f3; /* fondo azul para resetear */
+}
+
+.delete-button {
+  background-color: #f44336; /* fondo rojo para eliminar */
+}
+
+/* Hover effect para botones que no están deshabilitados */
+.custom-button:hover:not(:disabled) {
+  opacity: 0.8; /* efecto de opacidad al pasar el cursor */
+}
+
+.tab-content {
+  padding: 1em;
+}
+.tab-container {
+  display: flex;
+  flex-direction: column;
+}
+.tabs {
+  display: flex;
+  cursor: pointer;
+}
+.tab {
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  border-bottom: none;
+  display: flex;
+  align-items: center;
+}
+.tab mat-icon {
+  margin-right: 8px;
+}
+.tab-content {
+  border: 1px solid #ccc;
+  padding: 20px;
+}
+.active {
+  background-color: #f1f1f1;
+}

@@ -1,0 +1,71 @@
+<div class="juego-configuracion-container">
+    <form [formGroup]="configuracionForm">
+        <div class="text-field-container">
+            <label class="text-field-label">Nombre del Servidor</label>
+            <div class="text-field-wrapper">
+                <input type="text" placeholder="Nombre para el servidor" class="text-field-input" formControlName="nombreServidor">
+                <span class="text-field-info">El nombre que llevará tu servidor</span>
+            </div>
+        </div>
+        @if (configuraciones?.env?.length) {
+            <div class="configuraciones">
+                <h3>Configuraciones específicas para el juego</h3>
+                <div formGroupName="env">
+                    @for (config of configuraciones?.env; track $index) {
+                        <div class="text-field-container">
+                            <label class="text-field-label">{{ config.clave }}</label>
+                            <div class="text-field-wrapper">
+                                <input [type]="config.tipo_dato" [placeholder]="config.clave" class="text-field-input" [formControlName]="config.clave">
+                                <span class="text-field-info">{{ config.descripcion }}</span>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+        @if (configuraciones?.files?.length) {
+            <div class="configuraciones" formGroupName="files">
+                @for (file of configuraciones?.files; track $index) {
+                    <div formGroupName="{{ file.name_file }}" class="configuracion-file">
+                        <h3 class="configuracion-header" (click)="toggleSection($event, file.name_file)">
+                            Configuraciones específicas para el juego: {{ file.name_file }}
+                            <mat-icon>{{ isSectionExpanded(file.name_file) ? 'expand_less' : 'expand_more' }}</mat-icon>
+                        </h3>
+                        <div class="configuracion-content" [class.active]="isSectionExpanded(file.name_file)">
+                            <div class="configuracion-grid">
+                                @for (config of file.fields; track $index) {
+                                    <div class="text-field-container">
+                                        <div class="text-field-label-container">
+                                            <label class="text-field-label">{{ config.clave }}</label>
+                                            <mat-icon [matTooltip]="config.descripcion">info</mat-icon>
+                                        </div>
+                                        <div class="text-field-wrapper">
+                                            @switch (config.type) {
+                                                @case ("string") {
+                                                    <input [type]="config.type" [placeholder]="config.clave" class="text-field-input" [formControlName]="config.clave">
+                                                }
+                                                @case ("boolean") {
+                                                    <label class="switch">
+                                                        <input type="checkbox" [formControlName]="config.clave">
+                                                        <span class="slider round"></span>
+                                                    </label>
+                                                }
+                                                @case ("number") {
+                                                    <input [type]="config.type" [placeholder]="config.clave" class="text-field-input" [formControlName]="config.clave">
+                                                }
+                                                @default {
+                                                    <input [type]="config.type" [placeholder]="config.clave" class="text-field-input" [formControlName]="config.clave">
+                                                }
+                                            }
+                                           
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </form>
+</div>

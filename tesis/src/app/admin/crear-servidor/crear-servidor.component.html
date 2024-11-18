@@ -1,0 +1,48 @@
+<div class="crear-servidor-container">
+  <h1 class="page-title"><mat-icon>cloud</mat-icon> <span class="title-text">Creando Servidor</span></h1>
+
+  <div #step1 class="step" [class.faded]="currentStep !== 1">
+    <h3><mat-icon>sports_esports</mat-icon> <span class="step_title">Selecciona el Juego</span> </h3>
+    <app-juego-selector (juegoSelected)="onJuegoSelected($event)"></app-juego-selector>
+    @if (currentStep == 1) {
+      <div class="button-container">
+        <button (click)="nextStep()" class="btn btn-next" [disabled]="!selectedJuego">Siguiente</button>
+      </div>
+    }
+  </div>
+
+  <div #step2 class="step" [class.faded]="currentStep !== 2">
+    <h3><mat-icon>settings</mat-icon> <span class="step_title">Caracteristicas del Servidor</span> </h3>
+    @if (currentStep >= 2) {
+      <app-server-type-selector
+        [juegoSelected]="selectedJuego"
+        (serverTypeSelected)="setServerType($event)"
+      ></app-server-type-selector>
+      <div class="button-container">
+        <button (click)="previousStep()" class="btn btn-prev">Anterior</button>
+        <button (click)="nextStep()" class="btn btn-next" [disabled]="!selectedServerType">Siguiente</button>
+      </div>
+    }
+  </div>
+
+  <div #step3 class="step" [class.faded]="currentStep !== 3">
+    <h3><mat-icon>list_alt</mat-icon> <span class="step_title">Ultimos Detalles</span> </h3>
+    @if (currentStep == 3) {
+      <app-juego-configuracion
+        [juegoSelected]="selectedJuego"
+        (configuracionFormFilled)="setConfiguracionForm($event)"
+        (juegoConfiguracionEmitter)="setJuegoConfiguraciones($event)"
+      ></app-juego-configuracion>
+      <div class="button-container">
+        <button (click)="previousStep()" class="btn btn-prev">Anterior</button>
+      </div>
+    }
+  </div>
+
+  <app-button-primary
+    label="Crear Servidor"
+    (click)="createServer()"
+    [hidden]="currentStep !== 3"
+    [disabled]="!configuracionForm?.valid"
+  ></app-button-primary>
+</div>
