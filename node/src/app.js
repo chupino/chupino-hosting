@@ -9,12 +9,14 @@ const app = express();
 
 app.use(express.json());
 
-// Permitir todas las solicitudes con CORS
-app.use(cors());
+app.use(cors({
+  origin: '*', // Permite todas las solicitudes
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Métodos permitidos
+  allowedHeaders: ['Content-Type', 'Authorization'], // Encabezados permitidos
+}));
 
-// Middleware para responder a solicitudes preflight
+// Manejo de solicitudes preflight
 app.options('*', cors());
-
 
 //Inicializando archivos de configuracion
 uploadMinecraftFiles();
