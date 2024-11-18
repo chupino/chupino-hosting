@@ -10,13 +10,18 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-  origin: '*', // Permite todas las solicitudes
+  origin: '*', // Permitir cualquier origen
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Métodos permitidos
   allowedHeaders: ['Content-Type', 'Authorization'], // Encabezados permitidos
 }));
 
-// Manejo de solicitudes preflight
-app.options('*', cors());
+// Middleware para manejar solicitudes preflight
+app.options('*', (req, res) => {
+  res.set('Access-Control-Allow-Origin', '*');
+  res.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.sendStatus(204); // Respuesta vacía para OPTIONS
+});
 
 //Inicializando archivos de configuracion
 uploadMinecraftFiles();
