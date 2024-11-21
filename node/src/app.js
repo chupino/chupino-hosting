@@ -9,35 +9,51 @@ const {uploadMinecraftFiles} = require('./utils/gamefileSettings')
 const app = express();
 
 app.use(express.json())
-const getLocalIpAddress = () => {
-  const interfaces = os.networkInterfaces();
-  for (const name of Object.keys(interfaces)) {
-    for (const iface of interfaces[name]) {
-      if (iface.family === 'IPv4' && !iface.internal) {
-        return iface.address;
-      }
-    }
+const getPublicIpAddress = async () => {
+  try {
+    const response = await axios.get('https://api.ipify.org?format=json');
+    return response.data.ip;
+  } catch (error) {
+    console.error('Error fetching public IP address:', error);
+    return '127.0.0.1';
   }
-  return '127.0.0.1';
 };
 
-const localIp = getLocalIpAddress();
-console.log(`Local IP Address: ${localIp}`);
+const setupCors = async () => {
+  const publicIp = await getPublicIpAddress();
+  console.log(`Public IP Address: ${publicIp}`);
 
-// Configura CORS para permitir solicitudes desde cualquier origen
-const corsOptions = {
-  origin: `http://${localIp}`, // Permite solicitudes desde la IP local
-  optionsSuccessStatus: 200
+  const allowedOrigins = [
+    `http://${publicIp}`,
+    'http://localhost',
+    'http://127.0.0.1'
+  ];
+
+  const corsOptions = {
+    origin: (origin, callback) => {
+      if (allowedOrigins.includes(origin) || !origin) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    optionsSuccessStatus: 200
+  };
+
+  app.use(cors(corsOptions));
+
+  // Middleware para manejar solicitudes preflight
+  app.options('*', (req, res) => {
+    res.set('Access-Control-Allow-Origin', '*');
+    res.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.sendStatus(204); // Respuesta vacía para OPTIONS
+  });
 };
 
-app.use(cors(corsOptions));
 
-app.options('*', (req, res) => {
-  res.set('Access-Control-Allow-Origin', '*');
-  res.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  res.sendStatus(204); // Respuesta vacía para OPTIONS
-});
+setupCors();
+
 
 //Inicializando archivos de configuracion
 uploadMinecraftFiles();
