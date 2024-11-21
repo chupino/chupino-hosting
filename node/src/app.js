@@ -30,6 +30,8 @@ const setupCors = async () => {
     'http://127.0.0.1'
   ];
 
+  console.log('Allowed Origins for CORS:', allowedOrigins);
+
   const corsOptions = {
     origin: (origin, callback) => {
       if (allowedOrigins.includes(origin) || !origin) {
