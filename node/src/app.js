@@ -7,15 +7,30 @@ const {uploadMinecraftFiles} = require('./utils/gamefileSettings')
 
 const app = express();
 
-app.use(express.json());
+app.use(express.json())
+const getLocalIpAddress = () => {
+  const interfaces = os.networkInterfaces();
+  for (const name of Object.keys(interfaces)) {
+    for (const iface of interfaces[name]) {
+      if (iface.family === 'IPv4' && !iface.internal) {
+        return iface.address;
+      }
+    }
+  }
+  return '127.0.0.1';
+};
 
-app.use(cors({
-  origin: '*', // Permitir cualquier origen
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Métodos permitidos
-  allowedHeaders: ['Content-Type', 'Authorization'], // Encabezados permitidos
-}));
+const localIp = getLocalIpAddress();
+console.log(`Local IP Address: ${localIp}`);
 
-// Middleware para manejar solicitudes preflight
+// Configura CORS para permitir solicitudes desde cualquier origen
+const corsOptions = {
+  origin: `http://${localIp}`, // Permite solicitudes desde la IP local
+  optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
+
 app.options('*', (req, res) => {
   res.set('Access-Control-Allow-Origin', '*');
   res.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
