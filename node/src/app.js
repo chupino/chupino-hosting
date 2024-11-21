@@ -10,8 +10,8 @@ const {uploadMinecraftFiles} = require('./utils/gamefileSettings')
 const app = express();
 
 app.use(express.json())
-app.options('*', cors());
 
+app.options('*', cors());
 
 //Inicializando archivos de configuracion
 uploadMinecraftFiles();
